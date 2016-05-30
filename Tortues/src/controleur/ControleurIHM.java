@@ -29,7 +29,7 @@ public class ControleurIHM implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String c = e.getActionCommand();
         
-        JComboBox cb = new JComboBox();
+        JComboBox cb;
         switch (c) {
             case "Avancer":
                 System.out.println("commande avancer");
