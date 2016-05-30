@@ -7,18 +7,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import javax.swing.JComboBox;
 import modele.Tortue;
-import vue.IHM;
+import vue.IHM1;
 
 /**
  * @author Thomas PERISSIER et Justine GROLEAU
  */
-public class ControleurIHM implements ActionListener, MouseListener {
+public class ControleurIHM1 implements ActionListener, MouseListener {
     
-    private final IHM ihm;
+    private final IHM1 ihm;
     private Tortue tortue;
     private int n;
     
-    public ControleurIHM(IHM ihm, Tortue tortue) {
+    public ControleurIHM1(IHM1 ihm, Tortue tortue) {
         this.ihm = ihm;
         this.tortue = tortue;      
     }
@@ -75,15 +75,16 @@ public class ControleurIHM implements ActionListener, MouseListener {
 
     }
     
-    public Tortue creerTortue(Dimension size){          
-        this.setTortue(new Tortue(size.width/2, size.height/2, Tortue.FormeTortue.POLYGONE));
+    public Tortue creerTortue(Tortue.FormeTortue forme){          
+        this.setTortue(new Tortue(forme));
         return tortue;
     }
     
     //Crée une nouvelle tortue
     public void ajouter(int n) {
         Dimension size = ihm.getTortueDessin().getSize();
-        Tortue newTortue = new Tortue(size.width/2, size.height/2, Tortue.FormeTortue.POLYGONE);
+        Tortue newTortue = new Tortue(Tortue.FormeTortue.CERCLE);
+        newTortue.setPosition(size.width/2, size.height/2);
         newTortue.setColInt(n);      
         
         ihm.getTortueDessin().addTortue(newTortue);
@@ -119,26 +120,33 @@ public class ControleurIHM implements ActionListener, MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int x = e.getX();
+        int y = e.getY();
+        
+        for(Tortue t:this.ihm.getTortueDessin().getTortues()){
+            if(x< t.getX()+10 && x>t.getX()-10 && y<t.getY()+10 && y>t.getY()-10){
+                this.setTortue(t);
+            }
+        }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
 }

@@ -1,6 +1,6 @@
 package vue;
 
-import controleur.ControleurIHM;
+import controleur.ControleurIHM1;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
@@ -28,7 +28,7 @@ import modele.Tortue;
  *
  *************************************************************************
  */
-public final class IHM extends JFrame implements Observer {
+public final class IHM1 extends JFrame implements Observer {
     
     public static final Dimension VGAP = new Dimension(1, 5);
     public static final Dimension HGAP = new Dimension(5, 1);
@@ -37,11 +37,11 @@ public final class IHM extends JFrame implements Observer {
     private Tortue tortue;
     
     private JTextField inputValue;
-    private ControleurIHM controleurIHM;
+    private ControleurIHM1 controleurIHM;
         
-    public IHM() {
+    public IHM1() {
         super("Tortues");
-        controleurIHM = new ControleurIHM(this, tortue);
+        controleurIHM = new ControleurIHM1(this, tortue);
         ihmInit();
 
         addWindowListener(new WindowAdapter() {
@@ -62,18 +62,7 @@ public final class IHM extends JFrame implements Observer {
         return (s);
     }
     
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            IHM fenetre = new IHM();
-            fenetre.setVisible(true);
-        });
-
-    }
-    
-    public void ihmInit() {
+    public void ihmInit() {        
         getContentPane().setLayout(new BorderLayout(10, 10));
         
         JToolBar toolBar = new JToolBar();
@@ -143,7 +132,10 @@ public final class IHM extends JFrame implements Observer {
         getContentPane().add(tortueDessin, "Center");
         
         //Création de la tortue
-        tortue = controleurIHM.creerTortue(tortueDessin.getSize());
+        tortue = controleurIHM.creerTortue(Tortue.FormeTortue.POLYGONE);
+        
+        Dimension size = tortueDessin.getSize();
+        tortue.setPosition(size.width/2, size.height/2);
 
         tortueDessin.addTortue(tortue);
           

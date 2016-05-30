@@ -29,9 +29,7 @@ public final class Tortue extends Observable {
     
     private FormeTortue formeTortue;
 
-    public Tortue(int leX, int leY, FormeTortue forme) {
-        this.x = leX;
-        this.y = leY;
+    public Tortue(FormeTortue forme) {
         this.formeTortue = forme;
     }
 
@@ -118,6 +116,4 @@ public final class Tortue extends Observable {
         this.formeTortue = formeTortue;
     }
 
-    
-    
 }
