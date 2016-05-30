@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import modele.Tortue;
-import modele.Tortue.FormeTortue;
 
 /**
  * @author Thomas PERISSIER et Justine GROLEAU
@@ -19,11 +18,11 @@ import modele.Tortue.FormeTortue;
  * @author J. Ferber
  * @version 2.0
  */
-public class TortueDessin extends JPanel {
+public class TortueDessin extends JPanel{
     private final ArrayList<Tortue> tortues;
     
     public TortueDessin() {
-        tortues = new ArrayList<>();
+        tortues = new ArrayList<>();   
     }
     
     public ArrayList<Tortue> getTortues() {
@@ -31,7 +30,7 @@ public class TortueDessin extends JPanel {
     }
     
     public void addTortue(Tortue tortue) {
-        tortues.add(tortue);       
+        tortues.add(tortue);   
     }
     
     public void removeTortue(Tortue tortue) {
@@ -85,6 +84,9 @@ public class TortueDessin extends JPanel {
             case POLYGONE:
                 forme = new Polygone();
                 break;
+            case CARRE:
+                forme = new Carre();
+                break;
             default:
                 forme = new Polygone();
         }
@@ -104,6 +106,5 @@ public class TortueDessin extends JPanel {
 
         showTurtles(g);
     }
-    
-    
+
 }

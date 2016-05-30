@@ -3,6 +3,8 @@ package controleur;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.swing.JComboBox;
 import modele.Tortue;
 import vue.IHM;
@@ -10,7 +12,7 @@ import vue.IHM;
 /**
  * @author Thomas PERISSIER et Justine GROLEAU
  */
-public class ControleurIHM implements ActionListener {
+public class ControleurIHM implements ActionListener, MouseListener {
     
     private final IHM ihm;
     private Tortue tortue;
@@ -18,7 +20,7 @@ public class ControleurIHM implements ActionListener {
     
     public ControleurIHM(IHM ihm, Tortue tortue) {
         this.ihm = ihm;
-        this.tortue = tortue;
+        this.tortue = tortue;      
     }
     
     /**
@@ -74,7 +76,7 @@ public class ControleurIHM implements ActionListener {
     }
     
     public Tortue creerTortue(Dimension size){          
-        this.setTortue(new Tortue(size.width/2, size.height/2, Tortue.FormeTortue.CERCLE));
+        this.setTortue(new Tortue(size.width/2, size.height/2, Tortue.FormeTortue.POLYGONE));
         return tortue;
     }
     
@@ -113,5 +115,30 @@ public class ControleurIHM implements ActionListener {
     public void setTortue(Tortue tortue) {
         this.tortue = tortue;
         tortue.addObserver(ihm);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
