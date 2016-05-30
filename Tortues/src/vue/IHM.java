@@ -134,6 +134,8 @@ public final class IHM extends JFrame implements Observer {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         tortueDessin = new TortueDessin();
+        //Ceci permet d'ajouter le mouseListener
+        tortueDessin.addMouseListener(controleurIHM);
         tortueDessin.setBackground(Color.white);
         tortueDessin.setSize(new Dimension(600, 400));
         tortueDessin.setPreferredSize(new Dimension(600, 400));
