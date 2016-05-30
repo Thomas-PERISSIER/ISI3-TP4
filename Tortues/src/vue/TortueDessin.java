@@ -33,14 +33,14 @@ public class TortueDessin extends JPanel {
     }
     
     public void addTortue(Tortue tortue) {
-        tortues.add(tortue);
+        tortues.add(tortue);       
     }
     
     public void removeTortue(Tortue tortue) {
         tortues.remove(tortue);
     }
     
-    private Color decodeColor(int c) {
+    public static Color decodeColor(int c) {
         switch (c) {
             case 0:
                 return Color.black;
@@ -72,36 +72,24 @@ public class TortueDessin extends JPanel {
     }
     
     public void showTurtles(Graphics g) {
-        tortues.stream().forEach((tortue) -> {
-            drawTurtle(g, tortue);
-        });
+        for(Tortue t:tortues){
+            drawTurtle(g, t);
+        }       
     }
     
     public void drawTurtle(Graphics g, Tortue tortue) {
-        //Calcule les trois coins du triangle à partir de la position de la tortue
-        Point p = new Point(tortue.getX(), tortue.getY());
-        Polygon arrow = new Polygon();
-
-        //Calcule des deux bases
-        //Angle de la droite
-        double theta = Constante.RATIODEGRAD * (-tortue.getDirection());
-        //Demi angle au sommet du triangle
-        double alpha = Math.atan((float) Constante.RB / (float) Constante.RP);
-        //Rayon de la fleche
-        double r = Math.sqrt(Constante.RP * Constante.RP + Constante.RB * Constante.RB);
-        //Sens de la fleche
-
-        //Pointe
-        Point p2 = new Point((int) Math.round(p.x + r * Math.cos(theta)), (int) Math.round(p.y - r * Math.sin(theta)));
-        arrow.addPoint(p2.x, p2.y);
-        arrow.addPoint((int) Math.round(p2.x - r * Math.cos(theta + alpha)), (int) Math.round(p2.y + r * Math.sin(theta + alpha)));
-
-        //Base2
-        arrow.addPoint((int) Math.round(p2.x - r * Math.cos(theta - alpha)), (int) Math.round(p2.y + r * Math.sin(theta - alpha)));
-
-        arrow.addPoint(p2.x, p2.y);
-        g.setColor(decodeColor(tortue.getColInt()));
-        g.fillPolygon(arrow);
+        FormeTortue forme;
+        switch (tortue.getFormeType()) {
+            case "cercle":
+                forme = new Cercle();
+                break;
+            case "polygone":
+                forme = new Polygone();
+                break;
+            default:
+                forme = new Polygone();
+        }
+        forme.drawForme(g, tortue);    
     }
     
     @Override
@@ -117,4 +105,6 @@ public class TortueDessin extends JPanel {
 
         showTurtles(g);
     }
+    
+    
 }

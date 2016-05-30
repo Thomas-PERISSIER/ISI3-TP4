@@ -104,6 +104,12 @@ public final class IHM extends JFrame implements Observer {
         
         colorList.addActionListener(controleurIHM);
         
+        /*String[] formeStrings = {"triangle", "cercle"};
+        JComboBox formeList = new JComboBox(formeStrings);
+        toolBar.add(formeList);
+        
+        formeList.addActionListener(controleurIHM);*/
+        
         JMenuBar menubar = new JMenuBar();
         setJMenuBar(menubar);
         JMenu menuFile = new JMenu("File");
@@ -136,15 +142,10 @@ public final class IHM extends JFrame implements Observer {
         getContentPane().add(tortueDessin, "Center");
         
         //Création de la tortue
-        tortue = new Tortue();
-        
-        // Deplacement de la tortue au centre de la feuille
-        tortue.setPosition(500 / 2, 400 / 2);
-        
-        controleurIHM.setTortue(tortue);
-        
+        tortue = controleurIHM.creerTortue(tortueDessin.getSize());
+
         tortueDessin.addTortue(tortue);
-        
+          
         pack();
         setVisible(true);
     }

@@ -34,8 +34,7 @@ public class ControleurIHM implements ActionListener {
             case "Avancer":
                 System.out.println("commande avancer");
                 try {
-                    int v = Integer.parseInt(ihm.getInputValue());
-                    tortue.addObserver(ihm);
+                    int v = Integer.parseInt(ihm.getInputValue());                    
                     tortue.avancer(v);                    
                 } catch (NumberFormatException ex) {
                     System.err.println("Ceci n'est pas un nombre : " + ihm.getInputValue());
@@ -44,7 +43,6 @@ public class ControleurIHM implements ActionListener {
             case "Droite":
                 try {
                     int v = Integer.parseInt(ihm.getInputValue());
-                    tortue.addObserver(ihm);
                     tortue.droite(v);
                 } catch (NumberFormatException ex) {
                     System.err.println("Ceci n'est pas un nombre : " + ihm.getInputValue());
@@ -53,16 +51,13 @@ public class ControleurIHM implements ActionListener {
             case "Gauche":
                 try {
                     int v = Integer.parseInt(ihm.getInputValue());
-                    tortue.addObserver(ihm);
                     tortue.gauche(v);
                 } catch (NumberFormatException ex) {
                     System.err.println("Ceci n'est pas un nombre : " + ihm.getInputValue());
                 }
                 break;
             case "Ajouter":
-                tortue = ajouter(n);
-                tortue.addObserver(ihm);
-                tortue.notifier();
+                ajouter(n);               
                 break;
             case "Effacer":
                 effacer();
@@ -78,33 +73,30 @@ public class ControleurIHM implements ActionListener {
 
     }
     
+    public Tortue creerTortue(Dimension size){          
+        this.setTortue(new Tortue(size.width/2, size.height/2, "polygone"));
+        return tortue;
+    }
+    
     //Crée une nouvelle tortue
-    public Tortue ajouter(int n) {
-        Tortue newTortue = new Tortue();
-        newTortue.setColInt(n);
-        newTortue.setPosition(500/2, 400/2);
+    public void ajouter(int n) {
+        Dimension size = ihm.getTortueDessin().getSize();
+        Tortue newTortue = new Tortue(size.width/2, size.height/2, "polygone");
+        newTortue.setColInt(n);      
         
         ihm.getTortueDessin().addTortue(newTortue);
+        this.setTortue(newTortue);
         
-        return newTortue;
+        tortue.notifier();
     }
     
     //Efface tout et reinitialise la feuille
     public void effacer() {
-        ihm.getTortueDessin().getTortues().stream().forEach((tor) -> {
-            tor.reset();
-        });
-
-        //Replace la tortue au centre
-        Dimension size = ihm.getTortueDessin().getSize();
-        tortue.setPosition(size.width/2, size.height/2);
+        for(Tortue t:ihm.getTortueDessin().getTortues()){
+            t.reset(ihm.getTortueDessin().getSize());
+        }
     }
     
-    public void reset() {
-        ihm.getTortueDessin().getTortues().stream().forEach((tor) -> {
-            tor.reset();
-        });
-    }
     
     public void couleur(int n) {
         tortue.setColInt(n);
@@ -120,5 +112,6 @@ public class ControleurIHM implements ActionListener {
     
     public void setTortue(Tortue tortue) {
         this.tortue = tortue;
+        tortue.addObserver(ihm);
     }
 }

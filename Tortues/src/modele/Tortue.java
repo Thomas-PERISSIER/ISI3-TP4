@@ -1,5 +1,8 @@
 package modele;
 
+import vue.Cercle;
+import vue.Polygone;
+import java.awt.Dimension;
 import java.util.Observable;
 import logoInit.Constante;
 
@@ -24,8 +27,14 @@ import logoInit.Constante;
 public final class Tortue extends Observable {
 
     private int x, y, direction, colInt;
+    
+    private String formeType;
+    
 
-    public Tortue() {
+    public Tortue(int leX, int leY, String forme) {
+        this.x = leX;
+        this.y = leY;
+        this.formeType=forme;
     }
 
     public int getX() {
@@ -89,10 +98,10 @@ public final class Tortue extends Observable {
         this.notifier();
     }
     
-    public void reset() {
-        this.x = 0;
-        this.y = 0;
-        this.direction = -90;
+    public void reset(Dimension size) {
+        this.x = size.width/2;
+        this.y = size.height/2;
+        this.direction = 0;
         this.colInt = 0;
         
         this.notifier();
@@ -102,4 +111,16 @@ public final class Tortue extends Observable {
         setChanged();
         notifyObservers();
     }
+
+    public String getFormeType() {
+        return formeType;
+    }
+
+    public void setFormeType(String formeType) {
+        this.formeType = formeType;
+    }
+    
+    
+    
+    
 }
