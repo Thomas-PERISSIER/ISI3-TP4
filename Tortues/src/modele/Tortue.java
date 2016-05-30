@@ -80,12 +80,12 @@ public final class Tortue extends Observable {
     }
 
     public void droite(int ang) {
-        this.setDirection((this.getDirection() + ang) % 360);
+        this.direction = (direction + ang) % 360;
         this.notifier();
     }
 
     public void gauche(int ang) {
-        this.direction = (direction + ang) % 360;
+        this.direction = (direction - ang) % 360;
         this.notifier();
     }
     
