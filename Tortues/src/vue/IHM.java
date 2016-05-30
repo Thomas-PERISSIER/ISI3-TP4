@@ -4,6 +4,7 @@ import controleur.ControleurIHM;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.*;
@@ -82,6 +83,7 @@ public final class IHM extends JFrame implements Observer {
         
         getContentPane().add(buttonPanel, "North");
         
+        addButton(toolBar, "Ajouter", "Ajouter tortue", null);
         addButton(toolBar, "Effacer", "Nouveau dessin", "/icons/index.png");
         
         toolBar.add(Box.createRigidArea(HGAP));
@@ -107,6 +109,7 @@ public final class IHM extends JFrame implements Observer {
         JMenu menuFile = new JMenu("File");
         menubar.add(menuFile);
         
+        addMenuItem(menuFile, "Ajouter", "Ajouter", KeyEvent.VK_A);
         addMenuItem(menuFile, "Effacer", "Effacer", KeyEvent.VK_N);
         addMenuItem(menuFile, "Quitter", "Quitter", KeyEvent.VK_Q);
         

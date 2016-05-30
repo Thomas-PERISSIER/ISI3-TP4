@@ -100,7 +100,7 @@ public class TortueDessin extends JPanel {
         arrow.addPoint((int) Math.round(p2.x - r * Math.cos(theta - alpha)), (int) Math.round(p2.y + r * Math.sin(theta - alpha)));
 
         arrow.addPoint(p2.x, p2.y);
-        g.setColor(Color.green);
+        g.setColor(decodeColor(tortue.getColInt()));
         g.fillPolygon(arrow);
     }
     
