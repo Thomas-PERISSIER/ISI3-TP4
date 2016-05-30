@@ -38,9 +38,10 @@ public final class IHM extends JFrame implements Observer {
     
     private JTextField inputValue;
     private ControleurIHM controleurIHM;
-    
+        
     public IHM() {
         super("Tortues");
+        controleurIHM = new ControleurIHM(this, tortue);
         ihmInit();
 
         addWindowListener(new WindowAdapter() {
@@ -136,6 +137,9 @@ public final class IHM extends JFrame implements Observer {
         
         // Deplacement de la tortue au centre de la feuille
         tortue.setPosition(500 / 2, 400 / 2);
+        
+        controleurIHM.setTortue(tortue);
+        
         tortueDessin.addTortue(tortue);
         
         pack();
@@ -180,6 +184,6 @@ public final class IHM extends JFrame implements Observer {
     
     @Override
     public void update(Observable o, Object arg) {
-        //A compléter...
+        tortueDessin.repaint();
     }
 }

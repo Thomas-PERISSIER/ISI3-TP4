@@ -1,6 +1,7 @@
 package modele;
 
 import java.util.Observable;
+import logoInit.Constante;
 
 /**
  * @author Thomas PERISSIER et Justine GROLEAU
@@ -23,11 +24,8 @@ import java.util.Observable;
 public final class Tortue extends Observable {
 
     private int x, y, direction, colInt;
-    private Comportement comp;
 
     public Tortue() {
-        comp = new Fleche(this);
-        comp.reset();
     }
 
     public int getX() {
@@ -62,14 +60,6 @@ public final class Tortue extends Observable {
         return colInt;
     }
 
-    public Comportement getComp() {
-        return comp;
-    }
-
-    public void setComp(Comportement comp) {
-        this.comp = comp;
-    }
-
     public void setPosition(int newX, int newY) {
         x = newX;
         y = newY;
@@ -77,5 +67,39 @@ public final class Tortue extends Observable {
     
     public void couleur(int n) {
         colInt = n % 12;
+    }
+    
+    public void avancer(int dist) {
+        int newX = (int) Math.round(this.x + dist * Math.cos(Constante.RATIODEGRAD * this.direction));
+        int newY = (int) Math.round(this.y + dist * Math.sin(Constante.RATIODEGRAD * this.direction));
+
+        this.x = newX;
+        this.y = newY;
+        
+        this.notifier();
+    }
+
+    public void droite(int ang) {
+        this.setDirection((this.getDirection() + ang) % 360);
+        this.notifier();
+    }
+
+    public void gauche(int ang) {
+        this.direction = (direction + ang) % 360;
+        this.notifier();
+    }
+    
+    public void reset() {
+        this.x = 0;
+        this.y = 0;
+        this.direction = -90;
+        this.colInt = 0;
+        
+        this.notifier();
+    }
+    
+    public void notifier(){
+        setChanged();
+        notifyObservers();
     }
 }

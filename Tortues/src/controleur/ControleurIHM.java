@@ -13,7 +13,7 @@ import vue.IHM;
 public class ControleurIHM implements ActionListener {
     
     private final IHM ihm;
-    private final Tortue tortue;
+    private Tortue tortue;
     
     public ControleurIHM(IHM ihm, Tortue tortue) {
         this.ihm = ihm;
@@ -33,7 +33,8 @@ public class ControleurIHM implements ActionListener {
                 System.out.println("commande avancer");
                 try {
                     int v = Integer.parseInt(ihm.getInputValue());
-                    avancer(v);
+                    tortue.addObserver(ihm);
+                    tortue.avancer(v);                    
                 } catch (NumberFormatException ex) {
                     System.err.println("Ceci n'est pas un nombre : " + ihm.getInputValue());
                 }
@@ -41,7 +42,8 @@ public class ControleurIHM implements ActionListener {
             case "Droite":
                 try {
                     int v = Integer.parseInt(ihm.getInputValue());
-                    droite(v);
+                    tortue.addObserver(ihm);
+                    tortue.droite(v);
                 } catch (NumberFormatException ex) {
                     System.err.println("Ceci n'est pas un nombre : " + ihm.getInputValue());
                 }
@@ -49,7 +51,8 @@ public class ControleurIHM implements ActionListener {
             case "Gauche":
                 try {
                     int v = Integer.parseInt(ihm.getInputValue());
-                    gauche(v);
+                    tortue.addObserver(ihm);
+                    tortue.gauche(v);
                 } catch (NumberFormatException ex) {
                     System.err.println("Ceci n'est pas un nombre : " + ihm.getInputValue());
                 }
@@ -67,27 +70,15 @@ public class ControleurIHM implements ActionListener {
                 break;
         }
 
-        ihm.getTortueDessin().repaint();
     }
     
-    public void avancer(int dist) {
-        tortue.getComp().avancer(dist);
-    }
-
-    public void droite(int ang) {
-        tortue.getComp().droite(ang);
-    }
-
-    public void gauche(int ang) {
-        tortue.getComp().gauche(ang);
-    }
     
     //Efface tout et reinitialise la feuille
     public void effacer() {
         ihm.getTortueDessin().getTortues().stream().forEach((tor) -> {
-            tor.getComp().reset();
+            tor.reset();
         });
-        ihm.getTortueDessin().repaint();
+        
 
         //Replace la tortue au centre
         Dimension size = ihm.getTortueDessin().getSize();
@@ -96,7 +87,7 @@ public class ControleurIHM implements ActionListener {
     
     public void reset() {
         ihm.getTortueDessin().getTortues().stream().forEach((tor) -> {
-            tor.getComp().reset();
+            tor.reset();
         });
     }
     
@@ -106,5 +97,13 @@ public class ControleurIHM implements ActionListener {
     
     private void quitter() {
         System.exit(0);
+    }
+
+    public Tortue getTortue() {
+        return tortue;
+    }
+    
+    public void setTortue(Tortue tortue) {
+        this.tortue = tortue;
     }
 }
