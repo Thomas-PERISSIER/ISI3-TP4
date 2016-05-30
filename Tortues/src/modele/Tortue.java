@@ -25,14 +25,14 @@ public final class Tortue extends Observable {
 
     private int x, y, direction, colInt;
     
-    public enum FormeTortue {polygone, cercle, carré}; 
+    public enum FormeTortue {POLYGONE, CERCLE, CARRE}; 
     
-    private String formeTortue;
+    private FormeTortue formeTortue;
 
     public Tortue(int leX, int leY, FormeTortue forme) {
         this.x = leX;
         this.y = leY;
-        this.formeTortue = forme.toString();
+        this.formeTortue = forme;
     }
 
     public int getX() {
@@ -110,12 +110,14 @@ public final class Tortue extends Observable {
         notifyObservers();
     }
 
-    public String getFormeTortue() {
+    public FormeTortue getFormeTortue() {
         return formeTortue;
     }
 
-    public void setFormeTortue(String formeTortue) {
+    public void setFormeTortue(FormeTortue formeTortue) {
         this.formeTortue = formeTortue;
-    } 
+    }
+
+    
     
 }

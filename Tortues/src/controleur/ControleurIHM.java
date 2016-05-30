@@ -74,14 +74,14 @@ public class ControleurIHM implements ActionListener {
     }
     
     public Tortue creerTortue(Dimension size){          
-        this.setTortue(new Tortue(size.width/2, size.height/2, Tortue.FormeTortue.polygone));
+        this.setTortue(new Tortue(size.width/2, size.height/2, Tortue.FormeTortue.CERCLE));
         return tortue;
     }
     
     //Crée une nouvelle tortue
     public void ajouter(int n) {
         Dimension size = ihm.getTortueDessin().getSize();
-        Tortue newTortue = new Tortue(size.width/2, size.height/2, Tortue.FormeTortue.polygone);
+        Tortue newTortue = new Tortue(size.width/2, size.height/2, Tortue.FormeTortue.POLYGONE);
         newTortue.setColInt(n);      
         
         ihm.getTortueDessin().addTortue(newTortue);

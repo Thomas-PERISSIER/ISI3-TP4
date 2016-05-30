@@ -7,7 +7,6 @@ package vue;
 
 import java.awt.Graphics;
 import modele.Tortue;
-import vue.Forme;
 
 /**
  *
@@ -16,8 +15,9 @@ import vue.Forme;
 public class Cercle implements Forme{
 
     @Override
-    public void drawForme(Graphics g, Tortue tortue) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void drawForme(Graphics g, Tortue tortue) {     
+        g.fillOval(tortue.getX(),tortue.getY(),10,10);
+
     }
     
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import logoInit.Constante;
 import modele.Tortue;
+import modele.Tortue.FormeTortue;
 
 /**
  * @author Thomas PERISSIER et Justine GROLEAU
@@ -79,11 +80,12 @@ public class TortueDessin extends JPanel {
     
     public void drawTurtle(Graphics g, Tortue tortue) {
         Forme forme;
-        switch (tortue.getFormeTortue()) {
-            case "cercle":
+ 
+        switch (tortue.getFormeTortue()) {           
+            case CERCLE:
                 forme = new Cercle();
                 break;
-            case "polygone":
+            case POLYGONE:
                 forme = new Polygone();
                 break;
             default:
