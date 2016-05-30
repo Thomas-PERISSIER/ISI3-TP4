@@ -78,8 +78,8 @@ public class TortueDessin extends JPanel {
     }
     
     public void drawTurtle(Graphics g, Tortue tortue) {
-        FormeTortue forme;
-        switch (tortue.getFormeType()) {
+        Forme forme;
+        switch (tortue.getFormeTortue()) {
             case "cercle":
                 forme = new Cercle();
                 break;

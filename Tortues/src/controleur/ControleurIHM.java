@@ -74,14 +74,14 @@ public class ControleurIHM implements ActionListener {
     }
     
     public Tortue creerTortue(Dimension size){          
-        this.setTortue(new Tortue(size.width/2, size.height/2, "polygone"));
+        this.setTortue(new Tortue(size.width/2, size.height/2, Tortue.FormeTortue.polygone));
         return tortue;
     }
     
     //Crée une nouvelle tortue
     public void ajouter(int n) {
         Dimension size = ihm.getTortueDessin().getSize();
-        Tortue newTortue = new Tortue(size.width/2, size.height/2, "polygone");
+        Tortue newTortue = new Tortue(size.width/2, size.height/2, Tortue.FormeTortue.polygone);
         newTortue.setColInt(n);      
         
         ihm.getTortueDessin().addTortue(newTortue);
@@ -93,10 +93,10 @@ public class ControleurIHM implements ActionListener {
     //Efface tout et reinitialise la feuille
     public void effacer() {
         for(Tortue t:ihm.getTortueDessin().getTortues()){
-            t.reset(ihm.getTortueDessin().getSize());
+            Dimension size = ihm.getTortueDessin().getSize();
+            t.reset(size.width/2, size.height/2);
         }
-    }
-    
+    }  
     
     public void couleur(int n) {
         tortue.setColInt(n);
