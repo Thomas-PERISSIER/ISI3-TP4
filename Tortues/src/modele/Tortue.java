@@ -77,9 +77,22 @@ public final class Tortue extends Observable {
     public void avancer(int dist) {
         int newX = (int) Math.round(this.x + dist * Math.cos(Constante.RATIODEGRAD * this.direction));
         int newY = (int) Math.round(this.y + dist * Math.sin(Constante.RATIODEGRAD * this.direction));
-
-        this.x = newX;
-        this.y = newY;
+        
+        if (newX <= 600 && newX >= 0) {
+            this.x = newX;
+        } else if (newX > 600) {
+            this.x = newX - 600;
+        } else if (newX < 0) {
+            this.x = 600 + newX;
+        }
+        
+        if (newY <= 400 && newY >= 0) {
+            this.y = newY;
+        } else if (newY > 400) {
+            this.y = newY - 400;
+        } else if (newY < 0) {
+            this.y = 400 + newY;
+        }
         
         this.notifier();
     }

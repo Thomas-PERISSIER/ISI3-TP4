@@ -28,6 +28,7 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="btnTortuesAlea" max="32767" attributes="0"/>
                   <Component id="btnTortuesControleesIHM" max="32767" attributes="0"/>
+                  <Component id="btnTortuesModeFlocking" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="91" max="32767" attributes="0"/>
           </Group>
@@ -40,7 +41,9 @@
               <Component id="btnTortuesControleesIHM" min="-2" pref="47" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
               <Component id="btnTortuesAlea" min="-2" pref="53" max="-2" attributes="0"/>
-              <EmptySpace pref="78" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <Component id="btnTortuesModeFlocking" min="-2" pref="47" max="-2" attributes="0"/>
+              <EmptySpace pref="79" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -60,6 +63,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTortuesAleaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTortuesModeFlocking">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Tortues en mode flocking"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTortuesModeFlockingActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

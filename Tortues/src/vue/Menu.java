@@ -29,6 +29,7 @@ public class Menu extends javax.swing.JFrame {
 
         btnTortuesControleesIHM = new javax.swing.JButton();
         btnTortuesAlea = new javax.swing.JButton();
+        btnTortuesModeFlocking = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,6 +47,13 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        btnTortuesModeFlocking.setText("Tortues en mode flocking");
+        btnTortuesModeFlocking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTortuesModeFlockingActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -54,7 +62,8 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(100, 100, 100)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnTortuesAlea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTortuesControleesIHM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnTortuesControleesIHM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnTortuesModeFlocking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -64,7 +73,9 @@ public class Menu extends javax.swing.JFrame {
                 .addComponent(btnTortuesControleesIHM, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
                 .addComponent(btnTortuesAlea, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addGap(55, 55, 55)
+                .addComponent(btnTortuesModeFlocking, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(79, Short.MAX_VALUE))
         );
 
         pack();
@@ -78,11 +89,18 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTortuesControleesIHMActionPerformed
 
     private void btnTortuesAleaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTortuesAleaActionPerformed
-        // TODO add your handling code here:
-        IHM2 fenetre = new IHM2();
+        
+        IHM2 fenetre = new IHM2(1);
         fenetre.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnTortuesAleaActionPerformed
+
+    private void btnTortuesModeFlockingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTortuesModeFlockingActionPerformed
+        
+        IHM2 fenetre = new IHM2(2);
+        fenetre.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnTortuesModeFlockingActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,5 +147,6 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTortuesAlea;
     private javax.swing.JButton btnTortuesControleesIHM;
+    private javax.swing.JButton btnTortuesModeFlocking;
     // End of variables declaration//GEN-END:variables
 }

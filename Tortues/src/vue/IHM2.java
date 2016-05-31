@@ -36,13 +36,12 @@ public final class IHM2 extends JFrame implements Observer {
     private TortueDessin tortueDessin;
     private final ArrayList<Tortue> tortues = new ArrayList<>();
     
-    private JTextField inputValue;
-    private ControleurIHM2 controleurIHM;
+    private final ControleurIHM2 controleurIHM;
         
-    public IHM2() {
+    public IHM2(int mode) {
         super("Tortues");
         createTortues();
-        controleurIHM = new ControleurIHM2(this, tortues);
+        controleurIHM = new ControleurIHM2(this, tortues, mode);
         ihmInit();
 
         addWindowListener(new WindowAdapter() {
@@ -56,11 +55,6 @@ public final class IHM2 extends JFrame implements Observer {
     
     public TortueDessin getTortueDessin() {
         return tortueDessin;
-    }
-    
-    public String getInputValue() {
-        String s = inputValue.getText();
-        return (s);
     }
     
     public void ihmInit() {

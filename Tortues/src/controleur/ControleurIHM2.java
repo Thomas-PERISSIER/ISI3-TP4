@@ -13,19 +13,19 @@ public class ControleurIHM2 implements ActionListener {
     private final IHM2 ihm;
     private final ArrayList<Tortue> tortues;
     
-    public ControleurIHM2(IHM2 ihm, ArrayList<Tortue> tortues) {
+    public ControleurIHM2(IHM2 ihm, ArrayList<Tortue> tortues, int mode) {
         this.ihm = ihm;
         this.tortues = tortues;
         
-        comportementTortue();
+        comportementTortue(mode);
     }
     
     public ArrayList<Tortue> getTortue() {
         return tortues;
     }
     
-    private void comportementTortue() {
-        ComportementTortues comportementTortues = new ComportementTortues(tortues, ihm);
+    private void comportementTortue(int mode) {
+        ComportementTortues comportementTortues = new ComportementTortues(tortues, ihm, mode);
         comportementTortues.start();
     }
 
