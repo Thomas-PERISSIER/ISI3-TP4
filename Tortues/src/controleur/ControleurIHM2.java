@@ -1,41 +1,49 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controleur;
 
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
+import java.util.ArrayList;
 import modele.Tortue;
 import vue.IHM2;
 
 /**
- *
- * @author Epulapp
+ * @author Thomas PERISSIER et Justine GROLEAU
  */
-public class ControleurIHM2{
+public class ControleurIHM2 implements ActionListener {
     private final IHM2 ihm;
-    private Tortue tortue;
-    private int n;
+    private final ArrayList<Tortue> tortues;
     
-    public ControleurIHM2(IHM2 ihm, Tortue tortue) {
+    public ControleurIHM2(IHM2 ihm, ArrayList<Tortue> tortues) {
         this.ihm = ihm;
-        this.tortue = tortue;      
+        this.tortues = tortues;
+        
+        comportementTortue();
     }
     
-    public Tortue creerTortue(Tortue.FormeTortue forme){          
-        this.setTortue(new Tortue(forme));
-        return tortue;
+    public ArrayList<Tortue> getTortue() {
+        return tortues;
     }
     
-    public Tortue getTortue() {
-        return tortue;
+    private void comportementTortue() {
+        ComportementTortues comportementTortues = new ComportementTortues(tortues, ihm);
+        comportementTortues.start();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        String c = e.getActionCommand();
+        
+        switch (c) {
+            case "Quitter":
+                quitter();
+                break;
+            default:
+                break;
+        }
     }
     
-    public void setTortue(Tortue tortue) {
-        this.tortue = tortue;
-        tortue.addObserver(ihm);
+    private void quitter() {
+        System.exit(0);
     }
     
 }

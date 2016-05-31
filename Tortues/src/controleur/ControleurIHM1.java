@@ -85,7 +85,7 @@ public class ControleurIHM1 implements ActionListener, MouseListener {
         Dimension size = ihm.getTortueDessin().getSize();
         Tortue newTortue = new Tortue(Tortue.FormeTortue.CERCLE);
         newTortue.setPosition(size.width/2, size.height/2);
-        newTortue.setColInt(n);      
+        newTortue.setColInt(n);
         
         ihm.getTortueDessin().addTortue(newTortue);
         this.setTortue(newTortue);
@@ -95,7 +95,7 @@ public class ControleurIHM1 implements ActionListener, MouseListener {
     
     //Efface tout et reinitialise la feuille
     public void effacer() {
-        for(Tortue t:ihm.getTortueDessin().getTortues()){
+        for (Tortue t:ihm.getTortueDessin().getTortues()){
             Dimension size = ihm.getTortueDessin().getSize();
             t.reset(size.width/2, size.height/2);
         }
@@ -123,7 +123,7 @@ public class ControleurIHM1 implements ActionListener, MouseListener {
         int x = e.getX();
         int y = e.getY();
         
-        for(Tortue t:this.ihm.getTortueDessin().getTortues()){
+        for (Tortue t:this.ihm.getTortueDessin().getTortues()){
             if(x< t.getX()+10 && x>t.getX()-10 && y<t.getY()+10 && y>t.getY()-10){
                 this.setTortue(t);
             }

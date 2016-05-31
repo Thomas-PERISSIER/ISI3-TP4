@@ -69,7 +69,7 @@ public class TortueDessin extends JPanel{
     }
     
     public void showTurtles(Graphics g) {
-        for(Tortue t:tortues){
+        for (Tortue t:tortues){
             drawTurtle(g, t);
         }       
     }

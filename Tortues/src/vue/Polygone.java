@@ -6,7 +6,7 @@ import java.awt.Polygon;
 import logoInit.Constante;
 import modele.Tortue;
 
-/*
+/**
  * @author Thomas PERISSIER et Justine GROLEAU
  */
 public class Polygone implements Forme {
