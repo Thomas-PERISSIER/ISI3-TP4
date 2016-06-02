@@ -23,7 +23,7 @@ import logoInit.Constante;
  */
 public final class Tortue extends Observable {
 
-    private int x, y, direction, colInt;
+    private int x, y, direction, colInt, vitesse = 0;
     
     public enum FormeTortue {POLYGONE, CERCLE, CARRE}; 
     
@@ -63,6 +63,14 @@ public final class Tortue extends Observable {
 
     public int getColInt() {
         return colInt;
+    }
+    
+    public int getVitesse() {
+        return vitesse;
+    }
+    
+    public void setVitesse(int vitesse) {
+        this.vitesse = vitesse;
     }
 
     public void setPosition(int newX, int newY) {
