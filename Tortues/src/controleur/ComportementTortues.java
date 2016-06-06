@@ -13,7 +13,9 @@ import vue.IHM2;
  */
 public class ComportementTortues extends Thread {
     
-    private static final int distance = 20, angle = 180;
+    //Champ de vision de la tortue
+    private static final int distance = 200, angle = 120;
+    private static final int distanceMinimale = 20, distanceMaximale = 60;
     
     private ArrayList<Tortue> tortues = new ArrayList<>();
     private Tortue tortue;
@@ -45,7 +47,7 @@ public class ComportementTortues extends Thread {
         while (go) {
             tortue = tortues.get(i);
             int nombreAleatoire = 1 + (int)(Math.random() * 3);
-            int distang = 1 + (int)(Math.random() * 45);
+            int distang = 1 + (int)(Math.random() * 20);
             switch (nombreAleatoire) {
                 case 1:
                     System.out.println("Tortue " + i + " : Avance de " + distang);
@@ -68,7 +70,7 @@ public class ComportementTortues extends Thread {
                 flock++;
                 synchronized(this){
                     try {
-                        wait(100);
+                        wait(50);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(ComportementTortues.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -76,7 +78,7 @@ public class ComportementTortues extends Thread {
                 i = 0;
             }
             
-            if (mode == 2 && flock == 20)
+            if (mode == 2 && flock == 50)
                 break;
         }
     }
@@ -87,27 +89,27 @@ public class ComportementTortues extends Thread {
         while (go) {
             tortue = tortues.get(i);
             int direction = calculDirection(tortue);
+            int vitesse = (int)calculVitesse(tortue);
+                
+            if (vitesse == 0)
+                vitesse = 1 + (int)(Math.random() * 20);
+            
             if (direction != 0) {
                 if ((tortue.getDirection() - direction) < 0) {
                     tortue.droite(tortue.getDirection() - direction);
                 } else if ((tortue.getDirection() - direction) > 0) {
                     tortue.gauche(tortue.getDirection() - direction);
                 }
-            } else {
-                int vitesse = (int)calculVitesse(tortue);
-                
-                if (vitesse == 0)
-                    vitesse = 1 + (int)(Math.random() * 45);
-                
-                tortue.avancer(vitesse);
             }
+            tortue.avancer(vitesse);
+            
             tortue.addObserver(ihm);
             i++;
             
             if (i == tortues.size()) {
                 synchronized(this){
                     try {
-                        wait(100);
+                        wait(50);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(ComportementTortues.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -123,14 +125,23 @@ public class ComportementTortues extends Thread {
         ArrayList<Tortue> tor = searchTortues(tortue);
         
         for (Tortue torImp:tor) {
-            if (torImp.getVitesse() != 0) {
+            double dist = calculDistance(tortue, torImp);
+            //Se rapprocher des tortues qui sont dans son champ de vision
+            //tout en maintenant une distance minimale
+            if (dist < distanceMinimale) {
+                vitesse += 0;
+            } else if (dist > distanceMaximale) {
+                vitesse += torImp.getVitesse() + (dist - distanceMaximale);
+            } else {
                 vitesse += torImp.getVitesse();
-                nbTortue++;
-            }  
+            }
+            
+            nbTortue++;
         }
         
         if (nbTortue > 0) {
             vitesse /= nbTortue;
+            System.out.println("Vitesse moyenne :" + vitesse);
             return vitesse;
         } else {
             return 0;
@@ -149,6 +160,7 @@ public class ComportementTortues extends Thread {
         
         if (nbTortue > 0) {
             direction /= nbTortue;
+            System.out.println("Direction moyenne :" + direction);
             return (int)direction;
         } else {
             return 0;
@@ -170,14 +182,33 @@ public class ComportementTortues extends Thread {
         int newY2 = (int) Math.round(tortue.getY() + distance * Math.cos(Constante.RATIODEGRAD * directionMax));
         
         tortues.stream().forEach((torImp) -> {
-            double dist = sqrt((torImp.getX() - tortue.getX())^2 + (torImp.getY() - tortue.getY())^2);
+            double dist = calculDistance(tortue, torImp);
             if (dist < distance) {
-                if (torImp.getX() >= newX1 && torImp.getX() <= newX2 && torImp.getY() >= newY1 && torImp.getY() <= newY2) {
-                    tor.add(torImp);
+                if (newX1 <= newX2 && newY1 >= newY2) {
+                    if (torImp.getX() >= newX1 && torImp.getX() <= newX2 && torImp.getY() >= newY2 && torImp.getY() <= newY1) {
+                        tor.add(torImp);
+                    }
+                } else if (newX1 <= newX2 && newY1 <= newY2) {
+                    if (torImp.getX() >= newX1 && torImp.getX() <= newX2 && torImp.getY() >= newY1 && torImp.getY() <= newY2) {
+                        tor.add(torImp);
+                    }
+                } else if (newX1 >= newX2 && newY1 <= newY2) {
+                    if (torImp.getX() >= newX2 && torImp.getX() <= newX1 && torImp.getY() >= newY1 && torImp.getY() <= newY2) {
+                        tor.add(torImp);
+                    }
+                } else if (newX1 >= newX2 && newY1 >= newY2) {
+                    if (torImp.getX() >= newX2 && torImp.getX() <= newX1 && torImp.getY() >= newY2 && torImp.getY() <= newY1) {
+                        tor.add(torImp);
+                    }
                 }
             }
         });
         
         return tor;
+    }
+    
+    private double calculDistance(Tortue tortue, Tortue tor) {
+        double dist = sqrt((tor.getX() - tortue.getX())^2 + (tor.getY() - tortue.getY())^2);
+        return dist;
     }
 }

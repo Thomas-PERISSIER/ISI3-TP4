@@ -23,7 +23,7 @@ import logoInit.Constante;
  */
 public final class Tortue extends Observable {
 
-    private int x, y, direction, colInt, vitesse = 0;
+    private int x, y, direction, colInt, vitesse;
     
     public enum FormeTortue {POLYGONE, CERCLE, CARRE}; 
     
@@ -83,6 +83,8 @@ public final class Tortue extends Observable {
     }
     
     public void avancer(int dist) {
+        this.vitesse = dist;
+        
         int newX = (int) Math.round(this.x + dist * Math.cos(Constante.RATIODEGRAD * this.direction));
         int newY = (int) Math.round(this.y + dist * Math.sin(Constante.RATIODEGRAD * this.direction));
         
